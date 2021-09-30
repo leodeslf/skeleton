@@ -72,7 +72,7 @@ module.update();
  */
 ```
 
-[Live demo here](. "GitHub Pages") (1000 segments of 1px each).
+[Live demo here](https://leodeslf.github.io/inverse-kinematics/ "GitHub Pages") (1000 segments of 1px each).
 
 ## Author
 
