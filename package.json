@@ -1,0 +1,12 @@
+{
+  "name": "inverse-kinematics",
+  "version": "2.0.0",
+  "description": "A class to create an IK module in 2D for JavaScript",
+  "main": "module.js",
+  "keywords": [
+    "inverse-kinematics"
+  ],
+  "author": "Leonardo de S.L.F",
+  "license": "MIT",
+  "type": "module"
+}

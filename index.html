@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>inverse-kinematics demo</title>
+  <script type="module" src="./module.js"></script>
+  <script type="module" src="./segment.js"></script>
+  <script type="module" src="./vec.js"></script>
+  <script type="module">
+    import Module from "./module.js";
+    import Vec2 from "./vec.js";
+
+    const SEGMENTS = 1000;
+    const SEGMENT_SIZE = 1;
+    const CURSOR = new Vec2();
+    const MODULE = new Module(SEGMENTS, SEGMENT_SIZE, CURSOR);
+
+    let canvas, ctx;
+
+    window.addEventListener("load", () => {
+      ctx = document.getElementById("canvas").getContext("2d");
+
+      window.addEventListener("mousemove", (m) => {
+        // Update position.
+        CURSOR.xy = [m.x, m.y];
+      });
+      window.addEventListener("mousedown", () => {
+        // Add anchor.
+        MODULE.anchor = Vec2.fromCopy(MODULE.body[0].base);
+      });
+      window.addEventListener("mouseup", () => {
+        // Remove anchor.
+        MODULE.anchor = undefined;
+      });
+
+      draw();
+    });
+
+    function draw() {
+      MODULE.update();
+
+      ctx.clearRect(0, 0, 640, 640);
+
+      for (let i = 0; i < SEGMENTS; i++) {
+        ctx.beginPath();
+        ctx.moveTo(...MODULE.body[i].base.xy);
+        ctx.lineTo(...MODULE.body[i].end.xy);
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(draw);
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      outline: 1px solid grey;
+      outline-offset: -1px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <canvas width="640" height="640" id="canvas"></canvas>
+</body>
+
+</html>
