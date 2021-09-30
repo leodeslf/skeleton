@@ -3,6 +3,18 @@
   "version": "2.0.0",
   "description": "A class to create an IK module in 2D for JavaScript",
   "main": "module.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leodeslf/inverse-kinematics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leodeslf/inverse-kinematics/issues"
+  },
+  "homepage": "https://github.com/leodeslf/inverse-kinematics#readme",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org",
+    "access": "public"
+  },
   "keywords": [
     "inverse-kinematics"
   ],
