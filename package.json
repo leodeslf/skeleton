@@ -1,24 +1,33 @@
 {
-  "name": "@leodeslf/inverse-kinematics",
+  "name": "@leodeslf/skeleton",
   "version": "2.0.0",
-  "description": "A class to create an IK module in 2D for JavaScript",
-  "main": "module.js",
+  "description": "Inverse kinematics in JavaScript",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leodeslf/inverse-kinematics.git"
+    "url": "git+https://github.com/leodeslf/skeleton.git"
   },
   "bugs": {
-    "url": "https://github.com/leodeslf/inverse-kinematics/issues"
+    "url": "https://github.com/leodeslf/skeleton/issues"
   },
-  "homepage": "https://github.com/leodeslf/inverse-kinematics#readme",
+  "homepage": "https://github.com/leodeslf/skeleton#readme",
   "publishConfig": {
     "registry": "http://registry.npmjs.org",
     "access": "public"
   },
   "keywords": [
-    "inverse-kinematics"
+    "inverse-kinematics",
+    "kinematic-chain",
+    "skeleton"
   ],
   "author": "Leonardo de S.L.F",
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "types": "index.d.ts",
+  "dependencies": {
+    "@leodeslf/vec.js": "^3.0.0"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
 }
