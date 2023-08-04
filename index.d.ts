@@ -55,7 +55,7 @@ declare interface ModuleConstructor {
 /**
  * Inverse kinematics in JavaScript.
  */
-declare module "@leodeslf/scitamenik" {
+declare module "@leodeslf/skeleton" {
   /**
    * Inverse kinematic module.
    */
