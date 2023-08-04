@@ -5,56 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>inverse-kinematics demo</title>
-  <script type="module" src="./module.js"></script>
-  <script type="module" src="./segment.js"></script>
-  <script type="module" src="./vec.js"></script>
-  <script type="module">
-    import Module from "./module.js";
-    import Vec2 from "./vec.js";
-
-    const SEGMENTS = 1000;
-    const SEGMENT_SIZE = 1;
-    const CURSOR = new Vec2();
-    const MODULE = new Module(SEGMENTS, SEGMENT_SIZE, CURSOR);
-
-    let canvas, ctx;
-
-    window.addEventListener("load", () => {
-      ctx = document.getElementById("canvas").getContext("2d");
-
-      window.addEventListener("mousemove", (m) => {
-        // Update position.
-        CURSOR.xy = [m.x, m.y];
-      });
-      window.addEventListener("mousedown", () => {
-        // Add anchor.
-        MODULE.anchor = Vec2.fromCopy(MODULE.body[0].base);
-      });
-      window.addEventListener("mouseup", () => {
-        // Remove anchor.
-        MODULE.anchor = undefined;
-      });
-
-      draw();
-    });
-
-    function draw() {
-      MODULE.update();
-
-      ctx.clearRect(0, 0, 640, 640);
-
-      for (let i = 0; i < SEGMENTS; i++) {
-        ctx.beginPath();
-        ctx.moveTo(...MODULE.body[i].base.xy);
-        ctx.lineTo(...MODULE.body[i].end.xy);
-        ctx.closePath();
-        ctx.stroke();
-      }
-
-      requestAnimationFrame(draw);
-    }
-  </script>
+  <title>Skeleton Demo</title>
   <style>
     body {
       margin: 0;
@@ -66,10 +17,48 @@
     }
 
   </style>
+  <script type="module">
+    import { Vec2 } from 'https://cdn.jsdelivr.net/npm/@leodeslf/vec.js@3.0.0/index.min.js';
+    import Module from 'https://cdn.jsdelivr.net/npm/@leodeslf/skeleton@3.0.0/index.js';
+
+    const amountOfSegments = 1000;
+    const length = 1;
+    const target = new Vec2();
+    const rope = new Module(amountOfSegments, length, target);
+    let canvas;
+    let ctx;
+
+    window.addEventListener("load", () => {
+      ctx = document.getElementById("canvas").getContext("2d");
+      window.addEventListener("mousemove", (m) => {
+        target.xy = [m.x, m.y];
+      });
+      window.addEventListener("mousedown", () => {
+        rope.anchor = Vec2.fromCopy(rope.body[0].base);
+      });
+      window.addEventListener("mouseup", () => {
+        rope.anchor = undefined;
+      });
+      draw();
+    });
+
+    function draw() {
+      rope.update();
+      ctx.clearRect(0, 0, 800, 800);
+      for (let i = 0; i < amountOfSegments; i++) {
+        ctx.beginPath();
+        ctx.moveTo(...rope.body[i].base.xy);
+        ctx.lineTo(...rope.body[i].end.xy);
+        ctx.closePath();
+        ctx.stroke();
+      }
+      requestAnimationFrame(draw);
+    }
+  </script>
 </head>
 
 <body>
-  <canvas width="640" height="640" id="canvas"></canvas>
+  <canvas width="800" height="800" id="canvas"></canvas>
 </body>
 
 </html>
