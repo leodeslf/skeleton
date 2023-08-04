@@ -22,10 +22,9 @@
     import Module from 'https://cdn.jsdelivr.net/npm/@leodeslf/skeleton@3.0.0/index.js';
 
     const amountOfSegments = 1000;
-    const length = 1;
+    const length = 1000;
     const target = new Vec2();
     const rope = new Module(amountOfSegments, length, target);
-    let canvas;
     let ctx;
 
     window.addEventListener("load", () => {
@@ -45,20 +44,22 @@
     function draw() {
       rope.update();
       ctx.clearRect(0, 0, 800, 800);
+
       for (let i = 0; i < amountOfSegments; i++) {
         ctx.beginPath();
-        ctx.moveTo(...rope.body[i].base.xy);
-        ctx.lineTo(...rope.body[i].end.xy);
+        ctx.moveTo(...rope.body[i].tail);
+        ctx.lineTo(...rope.body[i].head);
         ctx.closePath();
         ctx.stroke();
       }
+
       requestAnimationFrame(draw);
     }
   </script>
 </head>
 
 <body>
-  <canvas width="800" height="800" id="canvas"></canvas>
+  <canvas width="800" height="800"></canvas>
 </body>
 
 </html>
