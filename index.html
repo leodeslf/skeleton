@@ -18,39 +18,40 @@
 
   </style>
   <script type="module">
-    import { Vec2 } from 'https://cdn.jsdelivr.net/npm/@leodeslf/vec.js@3.0.0/index.min.js';
-    import Module from 'https://cdn.jsdelivr.net/npm/@leodeslf/skeleton@3.0.0/index.js';
+    import { Vec2 } from "https://cdn.jsdelivr.net/npm/@leodeslf/vec.js@3.0.0/+esm";
+    import Module from 'https://cdn.jsdelivr.net/npm/@leodeslf/skeleton@3.0.0/+esm';
 
     const amountOfSegments = 1000;
     const length = 1000;
-    const target = new Vec2();
+    const target = new Vec2(400, 400);
     const rope = new Module(amountOfSegments, length, target);
-    let ctx;
+    let context;
 
     window.addEventListener("load", () => {
-      ctx = document.getElementById("canvas").getContext("2d");
+      context = document.getElementById("canvas").getContext("2d");
+      context.strokeStyle = "#000";
       window.addEventListener("mousemove", (m) => {
         target.xy = [m.x, m.y];
       });
       window.addEventListener("mousedown", () => {
-        rope.anchor = Vec2.fromCopy(rope.body[0].base);
+        rope.anchor = rope.segments[0].tail.clone();
       });
       window.addEventListener("mouseup", () => {
         rope.anchor = undefined;
       });
-      draw();
+      requestAnimationFrame(draw);
     });
 
     function draw() {
-      rope.update();
-      ctx.clearRect(0, 0, 800, 800);
+      rope.updatePositions();
+      context.clearRect(0, 0, 800, 800);
 
       for (let i = 0; i < amountOfSegments; i++) {
-        ctx.beginPath();
-        ctx.moveTo(...rope.body[i].tail);
-        ctx.lineTo(...rope.body[i].head);
-        ctx.closePath();
-        ctx.stroke();
+        context.beginPath();
+        context.moveTo(...rope.segments[i].tail);
+        context.lineTo(...rope.segments[i].head);
+        context.closePath();
+        context.stroke();
       }
 
       requestAnimationFrame(draw);
@@ -59,7 +60,7 @@
 </head>
 
 <body>
-  <canvas width="800" height="800"></canvas>
+  <canvas width="800" height="800" id="canvas"></canvas>
 </body>
 
 </html>
