@@ -1,7 +1,7 @@
 declare interface Segment {
   anchor: Vec2 | undefined;
   angle: number;
-  head: Vec2;
+  tip: Vec2;
   length: number;
   tail: Vec2;
   target: Vec2;

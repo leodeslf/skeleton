@@ -5,7 +5,7 @@ class Segment {
         this.target = target;
         this.anchor = anchor;
         this.angle = 0;
-        this.head = new Vec2();
+        this.tip = new Vec2();
         this.tail = new Vec2();
     }
     reachTarget() {
@@ -23,8 +23,8 @@ class Segment {
         }
     }
     recoverLength() {
-        this.head.copy(this.tail);
-        this.head.add(Vec2.fromPolarCoords(this.length, this.angle));
+        this.tip.copy(this.tail);
+        this.tip.add(Vec2.fromPolarCoords(this.length, this.angle));
     }
 }
 class Module {
@@ -36,7 +36,7 @@ class Module {
         const segmentLength = length / amountOfSegments;
         this.segments[0] = new Segment(segmentLength, undefined, anchor);
         for (let i = 1; i < amountOfSegments; i++) {
-            this.segments[i] = new Segment(segmentLength, undefined, this.segments[i - 1].head);
+            this.segments[i] = new Segment(segmentLength, undefined, this.segments[i - 1].tip);
             this.segments[i - 1].target = this.segments[i].tail;
         }
         this.segments[amountOfSegments - 1].target = target;

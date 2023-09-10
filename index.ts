@@ -2,7 +2,7 @@ import { Vec2 } from "@leodeslf/vec.js";
 
 class Segment implements Segment {
   angle: number = 0;
-  head: Vec2 = new Vec2();
+  tip: Vec2 = new Vec2();
   tail: Vec2 = new Vec2();
 
   constructor(
@@ -28,8 +28,8 @@ class Segment implements Segment {
   }
 
   recoverLength(): void {
-    this.head.copy(this.tail);
-    this.head.add(Vec2.fromPolarCoords(this.length, this.angle));
+    this.tip.copy(this.tail);
+    this.tip.add(Vec2.fromPolarCoords(this.length, this.angle));
   }
 }
 
@@ -50,7 +50,7 @@ class Module implements Module {
       this.segments[i] = new Segment(
         segmentLength,
         undefined,
-        this.segments[i - 1].head
+        this.segments[i - 1].tip
       );
       this.segments[i - 1].target = this.segments[i].tail;
     }

@@ -49,7 +49,7 @@
       for (let i = 0; i < amountOfSegments; i++) {
         context.beginPath();
         context.moveTo(...rope.segments[i].tail);
-        context.lineTo(...rope.segments[i].head);
+        context.lineTo(...rope.segments[i].tip);
         context.closePath();
         context.stroke();
       }
