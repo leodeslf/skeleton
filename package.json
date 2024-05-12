@@ -1,6 +1,6 @@
 {
   "name": "@leodeslf/skeleton",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Inverse kinematics in JavaScript",
   "main": "index.js",
   "repository": {
