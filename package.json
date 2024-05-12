@@ -25,7 +25,7 @@
   "type": "module",
   "types": "index.d.ts",
   "dependencies": {
-    "@leodeslf/vec.js": "^3.0.0"
+    "@leodeslf/vec.js": "^3.1.2"
   },
   "scripts": {
     "build": "tsc"
